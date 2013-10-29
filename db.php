@@ -4,6 +4,7 @@ class database {
 	private $conn;
 	
 	public function __construct() {
+		// Update database host, username, and password
 		$this->conn = new PDO('mysql:host=localhost;dbname=rss;','root','root');
 	}
 	
