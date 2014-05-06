@@ -61,6 +61,8 @@ class select_stories {
 			$output .= '<a href="'.$story['url'].'">'.$story['title'].'</a>';
 			$output .= '</td><td>';
 			$output .= substr($story['description'],0,200);
+			$output .= '</td><td>';
+			$output .= '<a href="edit_story_info.php?id=' . $story['id'] . '">Edit</a>';
 			$output .= '</td></tr>';
 		}
 		$output .= '</table><input type="submit" name="submit" value="Submit" /></form>';
@@ -78,6 +80,8 @@ class select_stories {
 			$output .= '<a href="'.$story['url'].'">'.$story['title'].'</a>';
 			$output .= '</td><td>';
 			$output .= substr($story['description'],0,200);
+			$output .= '</td><td>';
+			$output .= '<a href="edit_story_info.php?id=' . $story['id'] . '">Edit</a>';
 			$output .= '</td></tr>';
 			
 		}

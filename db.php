@@ -6,6 +6,7 @@ class database {
 	public function __construct() {
 		// Update database host, username, and password
 		$this->conn = new PDO('mysql:host=localhost;dbname=rss;','root','root');
+		//$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 	
 	public function add_feed($title, $url) {
@@ -72,6 +73,24 @@ class database {
 		$selectsql = "SELECT * FROM source_content WHERE id IN (SELECT source_content_id FROM feed_content WHERE feed_id=:feed_id) ORDER BY date DESC";
 		$query = $this->conn->prepare($selectsql);
 		$query->bindParam(":feed_id",$id);
+		$query->execute();
+		return $query->fetchAll();
+	}
+	
+	public function update_story($id, $title, $description, $url) {
+		$updatesql = "UPDATE source_content SET title=:title, description=:description, url=:url WHERE id=:story_id";
+		$query = $this->conn->prepare($updatesql);
+		$query->bindParam(":title", $title);
+		$query->bindParam(":description", $description);
+		$query->bindParam(":story_id", $id);
+		$query->bindParam(":url", $url);
+		$query->execute();
+	}
+	
+	public function get_story($id) {
+		$selectsql = "SELECT * FROM source_content WHERE id=:id";
+		$query = $this->conn->prepare($selectsql);
+		$query->bindParam(":id", $id);
 		$query->execute();
 		return $query->fetchAll();
 	}
